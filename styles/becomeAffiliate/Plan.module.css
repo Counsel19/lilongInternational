@@ -1,0 +1,55 @@
+.container {
+  padding: 1rem;
+  width: 19rem;
+  height: 100%;
+  border-radius: 0.35rem;
+}
+
+.container:hover{
+    outline: 1px solid var(--yello);
+    cursor: pointer;
+}
+
+.container ul {
+  list-style: none;
+}
+
+.container span {
+  font-size: 14px;
+  color: gray;
+  margin-bottom: .5rem;
+}
+.container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h3 {
+  color: var(--dark-blue);
+  font-weight: 500;
+  font-size: 24px;
+}
+.header h4 {
+  color: var(--yello);
+  font-weight: 500;
+  font-size: 30px;
+}
+
+.container ul{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    color: #222;
+}
+
+.container ul li{
+    color: #222;
+    font-size: 16px;
+    
+}
+
+.icon{
+    color: green;
+}

@@ -1,0 +1,116 @@
+.container {
+  margin: 5rem 5rem;
+}
+
+.container .articleType1,
+.articleType2 {
+  display: flex;
+  gap: 4rem;
+  margin: 13rem 0;
+}
+
+.container .articleType1:first-of-type{
+    margin-top: 7rem;
+}
+
+.articleType1 .left {
+  flex: 0.58;
+  position: relative;
+  height: fit-content;
+}
+
+.articleType1 .right {
+  flex: 0.5;
+  max-width: 350px;
+}
+
+.articleType1 .left .videoContainer {
+  width: 500px;
+  height: auto;
+  position: absolute;
+  right: 0;
+  top: 5rem;
+}
+
+.articleType1 .left .backdrop {
+  width: 500px;
+  height: 300px;
+  background-color: aliceblue;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 0.35rem;
+}
+
+.articleType1 .right h3,
+.articleType2 .left h3 {
+  font-weight: 500;
+  font-size: 30px;
+  margin-bottom: 1rem;
+  /* font-family: "League Spartan", sans-serif; */
+}
+
+.articleType1 .right p,
+.articleType2 .left p {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.articleType1 .right a,
+.articleType2 .left a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  width: fit-content;
+  gap: 0.5rem;
+  color: var(--dark-blue);
+}
+
+/* articleType2 */
+
+.articleType2 .left {
+  flex: 0.5;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.left .leftDetails {
+  max-width: 350px;
+}
+
+.articleType2 .right {
+  flex: 0.58;
+  position: relative;
+  height: fit-content;
+}
+
+.articleType2 .right .videoContainer {
+  width: 500px;
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 5rem;
+}
+
+.articleType2 .right .backdrop {
+  width: 500px;
+  height: 300px;
+  background-color: #f5f5f5;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: 0.35rem;
+}
+
+.container article:last-of-type .backdrop {
+  background-color: #eefff2;
+}
+
+.video {
+  border-radius: 0.35rem;
+  border: 1px solid var(--dark-blue);
+
+  height: fit-content;
+}

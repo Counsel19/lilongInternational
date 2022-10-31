@@ -1,0 +1,24 @@
+
+/* bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded fixed top-12 right-12 flex items-center justify-between gap-4 */
+.errorAlert {
+  background-color: #fff5f5;
+  border: 1px solid #fc8181;
+  color: #c53030;
+  padding: 0.5rem 1rem;
+  border-radius: 0.35rem;
+  position: fixed;
+  top: 6rem;
+  right: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.msg {
+  font-weight: bold;
+}
+
+.closeIcon {
+  padding: 0.75rem 1rem;
+}

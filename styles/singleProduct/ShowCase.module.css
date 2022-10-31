@@ -1,0 +1,43 @@
+.container{
+    width: 100%;
+}
+
+.galary{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+.imageWrapper{
+    width: 100px;
+    height: 80px;
+    position: relative;
+    border: 1px solid var(--dark-blue);
+    border-radius: .25rem;
+    cursor: pointer;
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(238, 242, 230, .5)
+}
+
+.imageDisplay{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageCase{
+    width: 700px;
+    height: 450px;
+    position: relative;
+    
+}

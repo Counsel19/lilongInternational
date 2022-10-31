@@ -1,0 +1,87 @@
+.container {
+  flex: 0.4;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  padding: 1rem;
+  height: fit-content;
+  background-color: #fff;
+}
+
+.container h3 {
+  font-weight: 600;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+
+.item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+  margin: 1rem 0;
+}
+.item:last-of-type {
+  border: 0;
+}
+.item h5 {
+  font-weight: 500;
+  font-size: 15px;
+  flex: 0.3;
+}
+.item span {
+  flex: 1;
+}
+.item .delivery {
+  font-size: 13px;
+  color:gray;
+}
+.item .price {
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.item .price {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.container .btn {
+  color: #fff;
+  background-color: var(--dark-blue);
+  padding: 0.8rem;
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  margin-top: 1.5rem;
+  border: 0;
+  outline: 0;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: 0.9s;
+}
+.container .btn:disabled {
+  cursor: not-allowed;
+  background-color: rgba(19, 82, 185, 0.5);
+}
+
+.paymentInfo {
+  color: gray;
+}
+
+.paymentStreams {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin-bottom: .5rem;
+}
+.paymentStreams span {
+  margin-right: 1rem;
+}
+
+.icon{
+  color: gray;
+}

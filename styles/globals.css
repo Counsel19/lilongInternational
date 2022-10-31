@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* font-family: 'Merriweather', serif; */
+/* font-family: 'Open Sans', sans-serif; */
+
+:root{
+  /* --blue: #046af0; */
+  --blue: #0b64da;
+  --banner-blue: #1352b9;
+  --light-blue: #2f8fe4;
+  --dark-blue: #172155;
+  --yello: #F7A76C;
+  --light-bg: #fafafa;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
@@ -15,7 +38,7 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
@@ -23,4 +46,4 @@ a {
     color: white;
     background: black;
   }
-}
+} */

@@ -1,0 +1,105 @@
+.container {
+  display: flex;
+  padding: 0.4rem 5rem;
+  background-color: var(--blue);
+  justify-content: space-between;
+  color: #fff;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.left ul,
+.right ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 2.5rem;
+  list-style: none;
+  align-items: center;
+}
+
+.right ul {
+  gap: 1.5rem;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 22px;
+  font-family: "League Spartan", sans-serif;
+  font-weight: 500;
+}
+
+.img {
+  border-radius: 50%;
+  border: 5px solid #fff;
+}
+
+/*  */
+.right .icon {
+  color: var(--dark-green);
+  font-size: 25px;
+}
+
+.cartBtn {
+  position: relative;
+}
+
+.cartBtn span {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  border-radius: 0.45rem;
+  top: -7px;
+  left: 15px;
+  color: var(--dark-blue);
+  font-size: 15px;
+}
+
+.account {
+  position: relative;
+  width: 155px;
+  padding: 0.4rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid #fff;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 155px;
+  height: fit-content;
+  background-color: #fff;
+  color: var(--dark-blue) !important;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  color: var(--dark-gray);
+  padding-top: 0.5rem;
+  font-weight: normal;
+  border-radius: 0.25rem;
+  border: 1px solid var(--dark-blue);
+}
+
+.dropdown span {
+  width: 100%;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+.dropdown span:hover {
+  background-color: #eee;
+}

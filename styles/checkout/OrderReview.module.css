@@ -1,0 +1,11 @@
+.container {
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+}
+
+.container h3 {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-size: 22px;
+}

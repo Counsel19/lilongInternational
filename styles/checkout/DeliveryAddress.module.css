@@ -1,0 +1,37 @@
+.container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
+    padding: 2rem;
+    background-color: #fff;
+}
+
+.container h4{
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: gray;
+}
+
+.container h4 span{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--dark-blue);
+}
+
+.container p{
+    margin-bottom: .8rem;
+}
+.container p span{
+   color: var(--yello);
+}
+
+.address > span{
+    border: 1px solid var(--dark-blue);
+    padding: .2rem .8rem;
+    border-radius: .15rem;
+    color: var(--dark-blue);
+    margin-top: 1rem;
+    display: flex;
+    width: fit-content;
+    cursor: pointer;
+    align-items: center;
+}

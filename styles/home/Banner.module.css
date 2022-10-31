@@ -1,0 +1,79 @@
+.container {
+  background-color: var(--blue);
+  padding: 4rem 5rem;
+  height: 95vh;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+
+.left {
+  width: 500px;
+}
+
+.left h1 {
+  font-weight: 600;
+  font-size: 40px;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  text-transform: uppercase;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.right {
+  
+  width: 550px;
+}
+
+.imgContainer {
+  height: 520px;
+  width: 520px;
+  position: relative;
+  z-index: 10;
+}
+
+.backdrop {
+  width: 600px;
+  height: 590px;
+  border-radius: 50%;
+  background-color: var(--banner-blue);
+  position: absolute;
+  top: 0;
+  right: 5rem;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.btn1,
+.btn2 {
+  width: 180px;
+  height: 47px;
+  border: 0;
+  background-color: #fff;
+  font-size: 18px;
+  border-radius: 0.35rem;
+  font-weight: 500;
+  color: var(--banner-blue);
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btns .btn1:hover {
+  background-color: rgb(235, 247, 255);
+}
+
+.btns .btn2 {
+  background-color: transparent;
+  color: #fff;
+}
+.btns .btn2:hover {
+  outline: 2px solid #fff;
+}

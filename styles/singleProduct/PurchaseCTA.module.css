@@ -1,0 +1,64 @@
+.container{
+    margin: 3rem 0;
+    position: sticky;
+    top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+    padding: 1rem;
+    gap: 1rem;
+    background-color: #fff;
+}
+
+.imageWrapper{
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.details h3{
+    font-weight: 500;
+    font-size: 21px;
+}
+
+
+.price h4{
+    font-size: 19px;
+    font-weight: 400;
+    
+}
+
+.price span{
+    text-decoration:line-through;
+    color: gray;
+}
+
+.details button{
+    color: #fff;
+    background-color: var(--banner-blue);
+    padding: .5rem 1rem;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    margin-top: 1.5rem;
+    border: 0;
+    outline: 0;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.9s;
+    gap: .5rem;
+}
+
+.icon{
+    font-size: 16px;
+}

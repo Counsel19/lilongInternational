@@ -1,0 +1,29 @@
+.container {
+  margin: 5rem 15rem 3rem;
+}
+
+.container h2 {
+  text-align: center;
+  color: var(--dark-blue);
+  font-weight: 500;
+  font-size: 36px;
+  font-family: "League Spartan", sans-serif;
+  margin-bottom: 0.8rem;
+}
+
+.container p {
+  text-align: center;
+  font-size: 20px;
+  color: gray;
+}
+
+.tagline h1 {
+  font-weight: 300;
+  font-size: 50px;
+  margin: 6rem 5rem 4rem;
+  text-align: center;
+}
+
+.tagline span {
+  color: var(--yello);
+}

@@ -1,0 +1,62 @@
+.container {
+  margin: 3rem 8rem;
+}
+
+.container h2 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 30px;
+  font-family: "League Spartan", sans-serif;
+  margin-bottom: 1.5rem;
+}
+
+.articles {
+  display: flex;
+  gap: 3rem;
+}
+
+.articles article {
+  flex: 1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  flex-direction: column;
+  width: 500px;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.imgWrapper {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  width: 100%;
+}
+
+.imgContainer {
+  width: 100%;
+  height: 200px;
+  position: relative;
+}
+
+.articles .details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 20px;
+  color: gray;
+  width: 60%;
+}
+
+.details h4 {
+  font-weight: 300;
+}
+
+.details span {
+  margin-top: 1rem;
+  cursor: pointer;
+  display: flex;
+  color: var(--dark-blue);
+}

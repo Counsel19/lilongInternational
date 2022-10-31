@@ -1,0 +1,37 @@
+.container {
+    padding: 2rem;
+    flex: 1;
+    height: fit-content;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+}
+
+.container2{
+    padding: .5rem 0;
+    flex: 1;
+    height: fit-content;
+}
+
+
+.container h3, .container2 h3{
+    color: var(--dark-blue);
+}
+
+.itemWrapper{
+    display: flex;
+    gap: 1rem;
+    height: 9.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.serialNum{
+    width: 4rem;
+    background-color: #f1f1f1;
+    color: gray;
+    border-radius: .25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 20px;
+}
