@@ -2,41 +2,72 @@ import NavStyles from "../styles/Navbar.module.css";
 import Image from "next/image";
 import CustomLink from "./CustomLink";
 import { BsCart3 } from "react-icons/bs";
+import { AiOutlineUser } from "react-icons/ai";
 import { useAppContext } from "../context/AppContext";
-import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
-import { useState } from "react";
+import {
+  RiArrowDropDownLine,
+  RiArrowDropUpLine,
+  RiMenu3Line,
+} from "react-icons/ri";
+import { signOut } from "next-auth/react";
+import { useEffect, useRef } from "react";
+import { IoSearch } from "react-icons/io5";
 
 const Account = () => {
-  const { user, handleLogout } = useAppContext();
+  const { user, handleLogout, showDropdown, handleSetShowDropdown } =
+    useAppContext();
 
-  const [showDropdown, setShowDropdown] = useState(false);
-const logout = async () => {
-  
-}
+  const btnRef = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!btnRef.current.contains(e.target)) {
+        handleSetShowDropdown(false);
+      }
+    };
+
+    document.body.addEventListener("click", handler);
+
+    return () => document.body.removeEventListener("click", handler);
+  }, []);
+
+  const logoutActions = async () => {
+    await handleLogout();
+    await signOut();
+  };
 
   return (
-    <div
-      className={NavStyles.account}
-      onClick={() => setShowDropdown(!showDropdown)}
-    >
-      {user.firstname}, Welcome!
-      {showDropdown ? (
-        <RiArrowDropUpLine className={NavStyles.icon} />
-      ) : (
-        <RiArrowDropDownLine className={NavStyles.icon} />
-      )}
+    <div className={NavStyles.account}>
+      <div
+        className="flex justify-center w-full items-center"
+        ref={btnRef}
+        onClick={() => handleSetShowDropdown(!showDropdown)}
+      >
+        <span className={NavStyles.userName}>
+          {user.firstname.length > 7
+            ? user.firstname.slice(0, 5) + `...`
+            : user.firstname}
+          , Welcome!
+        </span>
+        <AiOutlineUser className={NavStyles.userIcon} />
+        {showDropdown ? (
+          <RiArrowDropUpLine className={NavStyles.icon} />
+        ) : (
+          <RiArrowDropDownLine className={NavStyles.icon} />
+        )}
+      </div>
       {showDropdown && (
         <div className={NavStyles.dropdown}>
           <span>
-            <CustomLink url="/account" element="Account" />
+            <CustomLink url="/profile" element="Account" />
           </span>
           <span>
             <CustomLink url="/orders" element="Orders" />
           </span>
           <span>
-            <CustomLink url="/saved-items" element="Saved Items" />
+            <CustomLink url="/saved" element="Saved Items" />
           </span>
-          <span onClick={handleLogout}>Logout</span>
+          <span onClick={logoutActions}>Logout</span>
         </div>
       )}
     </div>
@@ -44,7 +75,8 @@ const logout = async () => {
 };
 
 const Navbar = () => {
-  const { numOfCartItems, user } = useAppContext();
+  const { numOfCartItems, user, handleInputChange } = useAppContext();
+
   return (
     <div className={NavStyles.container}>
       <div className={NavStyles.left}>
@@ -52,12 +84,12 @@ const Navbar = () => {
           <li>
             <CustomLink url="/products" element="Product" />
           </li>
-          <li>
-            <CustomLink url="#benefits" element="Benefits" />
-          </li>
 
           <li>
             <CustomLink url="/consult" element="Consult Therapist" />
+          </li>
+          <li>
+            <CustomLink url="/become-an-affiliate" element="Be an Affiliate" />
           </li>
         </ul>
       </div>
@@ -65,22 +97,29 @@ const Navbar = () => {
         url="/"
         element={
           <div className={NavStyles.center}>
-            <Image
-              src="/images/lilong.png"
-              alt="Lilong Logo"
-              width={60}
-              height={60}
-              className={NavStyles.img}
-            />
+            <div className={NavStyles.imgWrapper}>
+              <Image
+                src="/images/lilong.png"
+                alt="Lilong Logo"
+                objectFit="cover"
+                layout="fill"
+                className={NavStyles.img}
+              />
+            </div>
             Lilong International
           </div>
         }
       />
       <div className={NavStyles.right}>
         <ul>
-          <li>
-            <CustomLink url="/become-an-affiliate" element="Be an Affiliate" />
-          </li>
+          <div className="flex items-center">
+            <button
+              onClick={() => handleInputChange("showSearchModal", true)}
+              className=" text-blue-800 bg-white py-2 px-3 rounded-md"
+            >
+              <IoSearch size={25} />
+            </button>
+          </div>
           {!user ? (
             <li>
               <CustomLink url="/login" element="Login" />
@@ -102,6 +141,26 @@ const Navbar = () => {
             />
           </li>
         </ul>
+      </div>
+
+      <div className={NavStyles.menu}>
+        <span
+          className="cursor-pointer"
+          onClick={() => handleInputChange("showMobileNav", true)}
+        >
+          <RiMenu3Line size={23} />
+        </span>
+        <span className={NavStyles.cartBtn}>
+          <CustomLink
+            url="/cart"
+            element={
+              <>
+                <BsCart3 size={23} className={NavStyles.icon} />{" "}
+                <span>{numOfCartItems}</span>
+              </>
+            }
+          />
+        </span>
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
 import CartList from "../../components/cart/CartList";
-import OrdeeReviewStyles  from "../../styles/checkout/OrderReview.module.css"
+import OrderReviewStyles from "../../styles/checkout/OrderReview.module.css";
 
-const OrderReview = ({ products }) => {
+const OrderReview = ({ cartProducts }) => {
+
   return (
-    <div className={OrdeeReviewStyles.container}>
+    <div className={OrderReviewStyles.container}>
       <h3>Review Your Orders</h3>
-      <CartList products={products} checkout />
+      <CartList cartProducts={cartProducts} checkout />
     </div>
   );
 };

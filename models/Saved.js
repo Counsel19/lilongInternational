@@ -2,39 +2,14 @@ import mongoose from "mongoose";
 
 const SavedSchema = mongoose.Schema(
   {
-    name: {
-      type: String,
-      minlength: 3,
-      maxlength: 20,
-      required: [true, "Please provide a product name"],
+    productId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Product",
+      required: [true, "Please Specify a product"],
     },
-    category: {
-      type: String,
-      required: [true, "Please provide a product Category"],
-      maxlength: 50,
-    },
-    price: {
+    quantity: {
       type: Number,
-      required: [true, "Please provide a product Price"],
-    },
-    actualPrice: {
-      type: Number,
-    },
-    featured: {
-      type: Boolean,
-      default: false,
-    },
-    images: {
-      type: [String],
-      required: [true, "Please provide a provide product images"],
-    },
-    link: {
-      type: String,
-      required: [true, "Please provide a product link"],
-    },
-    inStock: {
-      type: Boolean,
-      defualt: true,
+      required: [true, "Please Provide a quantity"],
     },
     createdBy: {
       type: mongoose.Types.ObjectId,

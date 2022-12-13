@@ -2,11 +2,12 @@
   margin-bottom: 4rem;
   padding: 3rem 5rem;
   /* background-color: #fbfbfe; */
-  background-color: var(--light-bg) ;
+  background-color: var(--light-bg);
 }
 
 .container2 {
   margin: 5rem 0;
+  width: 100%;
 }
 
 .heading h2 {
@@ -20,30 +21,24 @@
 .products {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .largeProducts {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
   margin-bottom: 2rem;
 }
 
 .imgContainer {
-  position: relative;
-  flex: 1;
-  height: 290px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   transition: 0.3s;
+  width: 90%;
 }
 
 .product {
-  width: 300px;
+  width: 280px;
   background-color: #fff;
   position: relative;
   transition: 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .product:hover,
@@ -62,14 +57,16 @@
 .allProducts a {
   background-color: #fff;
   color: var(--dark-blue);
-  padding: 0.8rem 2rem;
+  padding: 0.8rem 1rem;
   margin-top: 2rem;
   display: flex;
-  width: fit-content;
+  width: 220px;
   border: 1px solid var(--dark-blue);
   border-radius: 0.25rem;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .allProducts::before {
@@ -87,4 +84,44 @@
   height: 1px;
   position: relative;
   top: 1rem;
+}
+
+@media screen and (max-width: 1096px) {
+  .container {
+    padding: 3rem 2rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  .allProducts a {
+    font-size: 12px;
+    padding: 0.4rem 0.5rem;
+    gap: 0.2rem;
+    width: 400px;
+  }
+  
+  .allProducts::before {
+    width: 100%;
+  }
+  .allProducts::after {
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 3rem 1rem;
+  }
+  .allProducts a {
+    font-size: 12px;
+    padding: 0.4rem 0.5rem;
+    gap: 0.2rem;
+    width: 400px;
+  }
+
+  .heading h2 {
+    font-size: 26px;
+    text-align: center;
+  }
+ 
 }

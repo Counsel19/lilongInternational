@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  gap: 0.5rem;
+  margin-right: 1rem;
+  font-weight: 600;
+  color: gray;
+  align-items: center;
+  justify-content: center;
+}
+
+.container input {
+  width: 50px;
+  background-color: #e1ecf0;
+  border-radius: 0.35rem;
+  padding: 0.1rem 0.2rem 0.1rem 0.35rem;
+  outline: none;
+  border: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    gap: 0.2rem;
+    margin-right: 0.5rem;
+    font-weight: 600;
+    font-size: 12px;
+  }
+}

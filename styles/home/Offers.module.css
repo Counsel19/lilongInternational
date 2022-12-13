@@ -3,14 +3,15 @@
 }
 
 .container .articleType1,
-.articleType2 {
+.container .articleType2 {
   display: flex;
   gap: 4rem;
   margin: 13rem 0;
+  justify-content: space-between;
 }
 
-.container .articleType1:first-of-type{
-    margin-top: 7rem;
+.container .articleType1:first-of-type {
+  margin-top: 7rem;
 }
 
 .articleType1 .left {
@@ -29,16 +30,14 @@
   height: auto;
   position: absolute;
   right: 0;
-  top: 5rem;
+  left: 10%;
+  top: 3rem;
 }
 
 .articleType1 .left .backdrop {
   width: 500px;
   height: 300px;
   background-color: aliceblue;
-  position: absolute;
-  left: 0;
-  top: 0;
   border-radius: 0.35rem;
 }
 
@@ -84,6 +83,8 @@
   flex: 0.58;
   position: relative;
   height: fit-content;
+  justify-content: flex-end;
+  display: flex;
 }
 
 .articleType2 .right .videoContainer {
@@ -91,17 +92,16 @@
   height: auto;
   position: absolute;
   left: 0;
-  top: 5rem;
+  right: 10%;
+  top: 3rem;
 }
 
 .articleType2 .right .backdrop {
   width: 500px;
   height: 300px;
   background-color: #f5f5f5;
-  position: absolute;
-  right: 0;
-  top: 0;
   border-radius: 0.35rem;
+  justify-self: flex-end;
 }
 
 .container article:last-of-type .backdrop {
@@ -111,6 +111,84 @@
 .video {
   border-radius: 0.35rem;
   border: 1px solid var(--dark-blue);
-
   height: fit-content;
+}
+
+@media screen and (max-width: 1038px) {
+  .container .articleType1 {
+    flex-direction: column;
+  }
+  .container,
+  .articleType2 {
+    flex-direction: column-reverse;
+  }
+
+  .articleType1 .right {
+    max-width: 80%;
+  }
+  .left .leftDetails {
+    max-width: 80%;
+  }
+
+  .articleType1 .right h3,
+  .articleType2 .left h3 {
+   
+   margin-top: 2rem;
+  
+  }
+}
+@media screen and (max-width: 1096px) {
+  .container {
+    margin: 5rem 2rem;
+  }
+}
+@media screen and (max-width: 1096px) {
+  .container {
+    margin: 5rem 2rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    margin: 5rem 1rem;
+  }
+
+  .container .articleType1,
+  .container .articleType2 {
+    margin: 6rem 0;
+  }
+
+  .articleType1 .left .videoContainer,
+  .articleType2 .right .videoContainer {
+    width: 280px;
+    height: 200px;
+  }
+
+  .articleType1 .left .backdrop,
+  .articleType2 .right .backdrop {
+    width: 280px;
+    height: 170px;
+    margin-bottom: 2rem;
+  }
+  .container .articleType1:first-of-type {
+    margin-top: 3rem;
+  }
+  .articleType1 .right h3,
+  .articleType2 .left h3 {
+    font-size: 20px;
+  }
+  .articleType1 .right p,
+  .articleType2 .left p {
+    font-size: 17px;
+  }
+  .articleType1 .right a,
+  .articleType2 .left a {
+    font-size: 17px;
+  }
+  .articleType1 .right {
+    max-width: 100%;
+  }
+  .left .leftDetails {
+    max-width: 100%;
+  }
 }

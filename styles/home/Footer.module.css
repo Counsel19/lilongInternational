@@ -1,7 +1,9 @@
 .container {
-  color:gray;
+  color: gray;
   font-size: 17px;
   font-weight: 200;
+  margin-top: 10rem;
+  padding: 0.5rem;
 }
 
 .container .icon {
@@ -17,7 +19,7 @@
   justify-content: space-between;
   gap: 2rem;
   padding: 3rem 8rem;
-  background-color: #f0f0f0;
+  background-color: #e1ecf0;
 }
 
 .top h2 {
@@ -52,7 +54,7 @@
 }
 
 .link li:hover {
-  transform: scale(1.1);
+  color: var(--yellow);
 }
 
 .link span {
@@ -123,7 +125,7 @@
   border: 1px solid var(--blue);
 }
 
-.btn button:nth-of-type(3):hover{
+.btn button:nth-of-type(3):hover {
   border: 1px solid transparent;
 }
 
@@ -139,4 +141,40 @@
   color: #fff;
   font-size: 18px;
   padding: 1rem 8rem;
+}
+
+.link a {
+  display: flex;
+  gap: 0.5rem;
+}
+@media screen and (max-width: 1096px) {
+  .top {
+    padding: 3rem 2rem;
+  }
+}
+@media screen and (max-width: 906px) {
+  .container {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .top {
+    flex-wrap: wrap;
+  }
+  .top h2 {
+    font-size: 16px;
+  }
+  .bottom {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .top {
+    padding: 3rem 1rem;
+  }
+
+  .bottom {
+    padding: 1rem 1rem;
+  }
 }

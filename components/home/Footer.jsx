@@ -1,7 +1,7 @@
 import footerStyles from "../../styles/home/Footer.module.css";
 import Link from "next/link";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { BsTelephone, BsTwitter, BsInstagram } from "react-icons/bs";
+import { BsTelephone, BsTwitter, BsInstagram, BsWhatsapp } from "react-icons/bs";
 import { IoMailOutline } from "react-icons/io5";
 import { FaFacebookF } from "react-icons/fa";
 import { IoLogoGoogleplus } from "react-icons/io";
@@ -49,7 +49,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="#about">
+              <Link href="/#about">
                 <a>
                   <VscArrowSmallRight className={footerStyles.icon} /> About
                   Company
@@ -57,7 +57,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="#consult">
+              <Link href="/#consult">
                 <a>
                   <VscArrowSmallRight className={footerStyles.icon} />
                   Consultation
@@ -106,27 +106,31 @@ const Footer = () => {
 
         <div className={footerStyles.others}>
           <h2>Follow us on</h2>
-          <div className={footerStyles.socialIcons}>
-            <Link href="https://facebook.com">
-              <a>
-                <FaFacebookF className={footerStyles.sIcon} />
-              </a>
-            </Link>
-            <Link href="https://twitter.com">
-              <a>
-                <BsTwitter className={footerStyles.sIcon} />
-              </a>
-            </Link>
-            <Link href="https://instagram.com">
-              <a>
-                <BsInstagram className={footerStyles.sIcon} />
-              </a>
-            </Link>
-            <Link href="https://google.com">
-              <a>
-                <IoLogoGoogleplus className={footerStyles.sIcon} />
-              </a>
-            </Link>
+          <div className="my-6 flex gap-4 mb-6">
+            <button
+              className="bg-white flex text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+              type="button"
+            >
+              <BsTwitter />
+            </button>
+            <button
+              className="bg-white flex text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+              type="button"
+            >
+              <BsInstagram />
+            </button>
+            <button
+              className="bg-white  flex text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+              type="button"
+            >
+              <FaFacebookF />
+            </button>
+            <button
+              className="bg-white flex text-gray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+              type="button"
+            >
+              <BsWhatsapp />
+            </button>
           </div>
 
           <div className={footerStyles.btn}>
@@ -135,11 +139,7 @@ const Footer = () => {
                 <button>Buy Products</button>
               </a>
             </Link>
-            <Link href="/products">
-              <a>
-                <button>Buy Products</button>
-              </a>
-            </Link>
+
             <button>Consult Therapist</button>
             <button>Become and Affiliate</button>
           </div>

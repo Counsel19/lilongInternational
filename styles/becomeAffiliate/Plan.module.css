@@ -5,9 +5,9 @@
   border-radius: 0.35rem;
 }
 
-.container:hover{
-    outline: 1px solid var(--yello);
-    cursor: pointer;
+.container:hover {
+  outline: 1px solid var(--yello);
+  cursor: pointer;
 }
 
 .container ul {
@@ -17,7 +17,7 @@
 .container span {
   font-size: 14px;
   color: gray;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 .container .header {
   display: flex;
@@ -37,19 +37,21 @@
   font-size: 30px;
 }
 
-.container ul{
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-    color: #222;
+.container ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #222;
 }
 
-.container ul li{
-    color: #222;
-    font-size: 16px;
-    
+.container ul li {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: #222;
+  font-size: 16px;
 }
 
-.icon{
-    color: green;
+.icon {
+  color: green;
 }

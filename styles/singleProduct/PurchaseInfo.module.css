@@ -102,7 +102,7 @@
   background-color: var(--banner-blue);
   padding: 0.7rem .8rem;
   font-weight: 500;
-  width: 90%;
+  max-width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,4 +176,22 @@
 .seller > span:last-of-type{
   font-weight: 600;
   color: var(--dark-blue);
+}
+
+@media screen and (max-width: 1000px) {
+  
+  .wrapper{
+    flex-direction: column;
+  }
+  .purchaseBtn button{
+    padding: 0.3rem .4rem;
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 894px) {
+  
+  .container h2 {
+    font-size: 26px;
+   
+  }
 }

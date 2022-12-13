@@ -1,0 +1,27 @@
+.container {
+    background-color: var(--dark-blue);
+    width: 150px;
+    height: 40px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    justify-content: center;
+    position: relative;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.addBtn{
+    position: absolute;
+    left: -10px;
+    top: 0;
+    background-color: #fff;
+    border-radius: 50%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+}

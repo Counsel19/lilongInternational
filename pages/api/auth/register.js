@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { HandleError } from "../../../utils";
 import dbConnect from "../../../lib/mongodb";
 import { serialize } from "cookie"
+import UnAuthenticatedError from "../../../errors/unauthenticated";
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -14,27 +15,35 @@ export default async function handler(req, res) {
       const { firstname, lastname, email, password } = req.body;
 
       if (!firstname || !lastname || !password || !email) {
-        throw new Error("Please provide all fields");
+        throw new UnAuthenticatedError("Please provide all fields");
       }
 
       const emailAlreadyExist = await User.findOne({ email });
 
       if (emailAlreadyExist) {
-        throw new Error("Email Already in use");
+        throw new UnAuthenticatedError("Email Already in use");
       }
 
       const user = await User.create(req.body);
 
-      const token = user.createJWT();
+      const { accessToken, refreshToken } = await user.createJWT();
+      user.password = undefined;
 
-      const serialized = serialize("token", token, {
+      const serializedToken = serialize("accessToken", accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV != "development",
         maxAge: process.env.JWT_MAX_AGE,
-        path: "/"
-      })
+        path: "/",
+      });
+      const serializedRefreshToken = serialize("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV != "development",
+        maxAge: 2592000,
+        path: "/",
+      });
 
-      res.setHeader("Set-Cookie", serialized);
+      res.setHeader("Set-Cookie", serializedToken, serializedRefreshToken);
+    
 
       res.status(StatusCodes.CREATED).json({
         user: {
@@ -46,7 +55,6 @@ export default async function handler(req, res) {
           phone: user.phone,
           deliveryAddress: user.deliveryAddress,
         },
-        token,
       });
     }
   } catch (error) {

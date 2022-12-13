@@ -1,0 +1,41 @@
+.container {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 2rem 0;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.9rem;
+  position: relative;
+}
+
+.card {
+  display: flex;
+  background-color: var(--light-bg);
+  border: 5px solid rgb(224, 224, 224);
+  width: fit-content;
+  padding: 2rem;
+  gap: 20px;
+ 
+}
+
+.wrapper p{
+  color: gray;
+  font-size: 20px;
+}
+
+.icon{
+    position: absolute;
+   top: -5px;
+   right: -5px;
+    color: green;
+    font-size: 26px;
+}

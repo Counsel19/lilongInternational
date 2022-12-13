@@ -1,11 +1,41 @@
 import Head from "next/head";
-import React from "react";
+import { useEffect, useState } from "react";
 import { ProductFilter, ProductsCatalog } from "../../components/products";
 import dbConnect from "../../lib/mongodb";
 import Category from "../../models/Category";
 import Product from "../../models/Product";
+import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { useAppContext } from "../../context/AppContext";
+import { TailSpin } from "react-loader-spinner";
+import ProductsStyles from "../../styles/products/ProductsPage.module.css";
 
-const index = ({ prices, products, categories }) => {
+const Index = ({ prices, products, categories, numOfPages }) => {
+  const {
+    getProducts,
+    productPriceFilter,
+    allProducts,
+    productCategoryFilter,
+    sort,
+    page,
+    search,
+  } = useAppContext();
+  const [controlledProducts, setControlledProducts] = useState(products);
+
+  useEffect(() => {
+    const getData = async () => {
+      await getProducts();
+    };
+
+    getData();
+  }, [productCategoryFilter, productPriceFilter, page, search, sort]);
+
+  useEffect(() => {
+    if (allProducts) {
+      setControlledProducts(allProducts);
+    }
+  }, [allProducts]);
+
   return (
     <div>
       <Head>
@@ -21,16 +51,31 @@ const index = ({ prices, products, categories }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div
-        style={{
-          padding: "3rem 5rem",
-          display: "flex",
-          gap: "4rem",
-          backgroundColor: "#fcfcfc",
-        }}
-      >
-        <ProductFilter prices={prices} categories={categories} />
-        <ProductsCatalog products={products} />
+      <div className={ProductsStyles.container}>
+        {!products || !prices || !categories ? (
+          <div
+            style={{
+              position: "fixed",
+              top: "0",
+              right: "0",
+              left: "0",
+              bottom: "0",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div className="w-full flex items-center justify-center">
+              <TailSpin />
+            </div>
+          </div>
+        ) : (
+          <>
+            <ProductFilter prices={prices} categories={categories} />
+            <ProductsCatalog products={controlledProducts} />
+          </>
+        )}
       </div>
     </div>
   );
@@ -40,9 +85,23 @@ export const getServerSideProps = async () => {
   let prices = [];
   let categories = [];
   let products = null;
+  let numOfPages = 0;
   try {
     await dbConnect();
-    const allProductsDetails = await Product.find();
+    const result = Product.find();
+
+    const page = 1;
+    const limit = 4;
+    const skip = (page - 1) * limit;
+
+    let allProductsDetails = await result
+      .skip(skip)
+      .limit(limit)
+      .sort("-createdAt");
+
+    const totalProducts = await Product.countDocuments();
+    numOfPages = Math.ceil(totalProducts / limit);
+
     products = allProductsDetails.map((item) => {
       return {
         _id: item._id,
@@ -61,35 +120,28 @@ export const getServerSideProps = async () => {
     prices = [
       {
         id: 1,
-        price: "< $20",
+        price: "less than 2k",
       },
       {
         id: 2,
-        price: "$20 - $50",
+        price: "2k - 100k",
       },
       {
         id: 3,
-        price: "$50 - $100",
+        price: "100k - 300k",
       },
       {
         id: 4,
-        price: "$100 - $200",
+        price: "300k - 500k",
       },
       {
         id: 5,
-        price: "$200 - $400",
+        price: "500k - 1000k",
       },
+
       {
         id: 6,
-        price: "$400 - $800",
-      },
-      {
-        id: 7,
-        price: "$800 - $1000",
-      },
-      {
-        id: 8,
-        price: "> $1000",
+        price: "Above 1000k",
       },
     ];
   } catch (error) {
@@ -101,8 +153,9 @@ export const getServerSideProps = async () => {
       prices: prices,
       products: JSON.parse(JSON.stringify(products)),
       categories: JSON.parse(JSON.stringify(categories)),
+      numOfPages,
     },
   };
 };
 
-export default index;
+export default Index;

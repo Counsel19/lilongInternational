@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import { SignJWT } from "jose";
 
 const UserSchema = new mongoose.Schema({
@@ -57,6 +56,12 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     required: [true, "Please provide delivery address"],
   },
+  resetPasswordToken: {
+    type: String,
+  },
+  resetPasswordTExpire: {
+    type: Date,
+  },
 });
 
 //Mongoose document middleware for the "save" hook
@@ -68,10 +73,19 @@ UserSchema.pre("save", async function () {
 
 //Instance method to create JWT
 UserSchema.methods.createJWT = async function () {
-  return await new SignJWT({ userId: this._id, isAdmin: this.isAdmin })
+  const payload = { userId: this._id, isAdmin: this.isAdmin };
+
+  const accessToken = await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256", typ: "JWT" })
     .setExpirationTime(process.env.JWT_LIFETIME)
     .sign(new TextEncoder().encode(process.env.JWT_SECRET));
+
+  const refreshToken = await new SignJWT(payload)
+    .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+    .setExpirationTime(process.env.JWT_REFRESH_LIFETIME)
+    .sign(new TextEncoder().encode(process.env.JWT_REFRESH_SECRET));
+
+  return { accessToken, refreshToken };
 };
 
 //Instance method to create JWT
@@ -79,5 +93,7 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
   const isMatch = await bcrypt.compare(candidatePassword, this.password);
   return isMatch;
 };
+
+UserSchema.methods.getResetPasswordToken = async function () {};
 
 export default mongoose.models.User || mongoose.model("User", UserSchema);

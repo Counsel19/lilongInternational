@@ -17,14 +17,15 @@
 }
 
 .container article {
-  width: 380px;
+  width: 350px;
   height: 510px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   background-color: var(--light-gray);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
+
 .container .imgWrapper {
   position: relative;
   height: 60%;
@@ -72,7 +73,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .2rem;
+  gap: 0.2rem;
 }
 
 .imgHover {
@@ -92,4 +93,38 @@
 }
 .container article:hover .icon {
   transform: translateX(50%);
+}
+
+@media screen and (max-width: 1096px) {
+  .container {
+    padding: 5rem 2rem;
+  }
+}
+@media screen and (max-width: 906px) {
+  .wrapper {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 788px) {
+  .container article {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 688px) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .container article {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 5rem 1rem;
+  }
+  .container h2 {
+    font-size: 25px;
+  }
+ 
 }

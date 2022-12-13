@@ -13,6 +13,7 @@ const VideoPlayer = ({ cloud_name, publicId }) => {
           innerRef={videoRef}
           autoPlay={true}
           loop={true}
+          muted
         />
       </div>
     </CloudinaryContext>

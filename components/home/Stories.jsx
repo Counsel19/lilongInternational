@@ -13,7 +13,7 @@ const Stories = () => {
     } else {
       setIndex(index + 1);
     }
-    setShowOverlay(true)
+    setShowOverlay(true);
   };
   const handleBack = () => {
     if (index === 0) {
@@ -21,7 +21,7 @@ const Stories = () => {
     } else {
       setIndex(index - 1);
     }
-    setShowOverlay(true)
+    setShowOverlay(true);
   };
 
   return (
@@ -30,7 +30,11 @@ const Stories = () => {
       <div className={StoryStyles.wrapper}>
         <div
           className={StoryStyles.story}
-          style={index === 0 ? { opacity: "1" } : { opacity: "0" }}
+          style={
+            index === 0
+              ? { opacity: "1", display: "flex" }
+              : { opacity: "0", display: "none" }
+          }
         >
           <div className={StoryStyles.left}>
             <h3>Mr. John Doe Story</h3>
@@ -42,26 +46,19 @@ const Stories = () => {
               repudiandae eligendi eaque blanditiis deserunt veniam odit,
               possimus magnam excepturi obcaecati rem unde at saepe tempora
               voluptas neque illo suscipit quo
-              {showOverlay && (
-                <span onClick={() => setShowOverlay(false)}>
-                  ...Continue Reading
-                </span>
-              )}
             </p>
-            <div className={StoryStyles.otherDetails}>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non
-                repudiandae eligendi eaque blanditiis deserunt veniam odit,
-                possimus magnam excepturi obcaecati rem unde at saepe tempora
-                voluptas neque illo suscipit quo!
-              </p>
 
-              <p>
-                possimus magnam excepturi obcaecati rem unde at saepe tempora
-                voluptas neque illo suscipit quo!
-              </p>
-              {showOverlay && <div className={StoryStyles.overlay}></div>}
-            </div>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non
+              repudiandae eligendi eaque blanditiis deserunt veniam odit,
+              possimus magnam excepturi obcaecati rem unde at saepe tempora
+              voluptas neque illo suscipit quo!
+            </p>
+
+            <p>
+              possimus magnam excepturi obcaecati rem unde at saepe tempora
+              voluptas neque illo suscipit quo!
+            </p>
           </div>
           <div className={StoryStyles.right}>
             <div className={StoryStyles.imgContainer}>
@@ -77,7 +74,11 @@ const Stories = () => {
 
         <div
           className={StoryStyles.story}
-          style={index === 1 ? { opacity: "1" } : { opacity: "0" }}
+          style={
+            index === 1
+              ? { opacity: "1", display: "flex" }
+              : { opacity: "0", display: "none" }
+          }
         >
           <div className={StoryStyles.left}>
             <h3>Mrs. Dorathy James Story</h3>
@@ -89,26 +90,19 @@ const Stories = () => {
               repudiandae eligendi eaque blanditiis deserunt veniam odit,
               possimus magnam excepturi obcaecati rem unde at saepe tempora
               voluptas neque illo suscipit quo
-              {showOverlay && (
-                <span onClick={() => setShowOverlay(false)}>
-                  ...Continue Reading
-                </span>
-              )}
             </p>
-            <div className={StoryStyles.otherDetails}>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non
-                repudiandae eligendi eaque blanditiis deserunt veniam odit,
-                possimus magnam excepturi obcaecati rem unde at saepe tempora
-                voluptas neque illo suscipit quo!
-              </p>
 
-              <p>
-                possimus magnam excepturi obcaecati rem unde at saepe tempora
-                voluptas neque illo suscipit quo!
-              </p>
-              {showOverlay && <div className={StoryStyles.overlay}></div>}
-            </div>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non
+              repudiandae eligendi eaque blanditiis deserunt veniam odit,
+              possimus magnam excepturi obcaecati rem unde at saepe tempora
+              voluptas neque illo suscipit quo!
+            </p>
+
+            <p>
+              possimus magnam excepturi obcaecati rem unde at saepe tempora
+              voluptas neque illo suscipit quo!
+            </p>
           </div>
           <div className={StoryStyles.right}>
             <div className={StoryStyles.imgContainer}>

@@ -2,22 +2,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
   background-color: rgba(128, 128, 128, 0.6);
   position: fixed;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 500;
+  padding: 1rem;
 }
 
 .wrapper {
   background-color: #fff;
   border-radius: 0.35rem;
   width: 40%;
-  padding: 2rem 3rem;
+  padding: 2rem 3rem 1rem;
   position: relative;
+  max-height: 490px;
+  margin: 10rem auto 5rem;
 }
 
 .wrapper article h2 {
@@ -34,12 +36,28 @@
   text-align: justify;
 }
 
-.icon{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    color: red;
-    font-size: 22px;
-    
+.icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: red;
+  font-size: 22px;
+}
+
+@media screen and (max-width: 856px) {
+  .wrapper {
+   
+    width: 100%;
+  }
+
+  .wrapper article h2 {
+    margin-bottom: 2rem;
+
+    font-size: 18px;
+  }
+
+  .wrapper article p {
+    font-size: 14px;
+  }
 }

@@ -1,0 +1,37 @@
+.container {
+  height: 100%;
+  flex: 0.9;
+}
+
+.header {
+  height: 4.7rem;
+}
+
+.menu {
+  max-height: 125vh;  
+  overflow: scroll;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+.mobileSidebarContainer {
+  background-color: #fff;
+  padding: 2rem 1rem;
+  max-width: 300px;
+  height: fit-content
+}
+
+.mobileSidebarContainer .header {
+  background-color: var(--banner-blue);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+  height: fit-content;
+}
+
+@media screen and (max-width: 894px) {
+  
+}

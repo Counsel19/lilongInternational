@@ -6,13 +6,13 @@ import { useAppContext } from "../../context/AppContext";
 import CartStyles from "../../styles/cart/Cart.module.css";
 import Link from "next/link";
 import { BsArrowLeft } from "react-icons/bs";
+import { getSession, useSession } from "next-auth/react";
+import Image from "next/image";
+import { TailSpin } from "react-loader-spinner";
 
 const Cart = () => {
-  const { cartItems: cartProducts, user, handleGetCart } = useAppContext();
+  const { cartItems: cartProducts, user } = useAppContext();
 
-  useEffect(() => {
-    handleGetCart();
-  }, []);
 
   return (
     <div>
@@ -29,28 +29,53 @@ const Cart = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={CartStyles.container}>
-        <Link href="/products">
-          <a>
-            <BsArrowLeft /> Continue to shop
-          </a>
-        </Link>
-        <h1>
-          Your Cart{" "}
-          {user && (
-            <span>
-              - Hello {user.firstname} {user.lastname}, below are your cart
-              items
-            </span>
-          )}
-        </h1>
-        <div className={CartStyles.details}>
-          <CartList cartProducts={cartProducts} />
-          <CartSummary cartProducts={cartProducts} />
-        </div>
-      </div>
+      <>
+        {!user ? (
+          <div className="w-full flex items-center justify-center">
+            <TailSpin />
+          </div>
+        ) : (
+          <div className={CartStyles.container}>
+            <Link href="/products">
+              <a>
+                <BsArrowLeft /> Continue to shop
+              </a>
+            </Link>
+            <h1>
+              Your Cart{" "}
+              {user && (
+                <span>
+                  - Hello {user.firstname} {user.lastname}, below are your cart
+                  items
+                </span>
+              )}
+            </h1>
+            <div className={CartStyles.details}>
+              <CartList cartProducts={cartProducts} />
+             {cartProducts ? <CartSummary cartProducts={cartProducts} />: <TailSpin /> }
+            </div>
+          </div>
+        )}
+      </>
     </div>
   );
 };
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
 
 export default Cart;

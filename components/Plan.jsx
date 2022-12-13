@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useAppContext } from "../context/AppContext";
 
 const Plan = ({ plan }) => {
-  const { dispatch } = useAppContext();
+  const { dispatch, addAffiliateUser, moneyFormat } = useAppContext();
   const router = useRouter();
 
   const updateAffiliateDetials = () => {
@@ -13,6 +13,7 @@ const Plan = ({ plan }) => {
       type: ACTIONS.UPDATE_AFFILIATE_DETAILS,
       payload: { affiliateDetails: plan },
     });
+    addAffiliateUser(plan, "affiliateDetails");
     router.push("/become-an-affiliate/apply");
   };
 
@@ -29,7 +30,7 @@ const Plan = ({ plan }) => {
       {plan.id === 2 && <span>Recommended</span>}
       <div className={PlanStyles.header}>
         <h3>{plan.name}</h3>
-        <h4>${plan.price}</h4>
+        <h4>{moneyFormat.format(plan.price)}</h4>
       </div>
 
       <p>{plan.desc}</p>

@@ -7,10 +7,8 @@ const About = () => {
       <p>
         China Tianjin Lilong Biotechnology Co., Ltd. integrates technological
         research and development, manufacturing, training, education, and
-        marketing. The core brands are all based on the principles of
-        naturalism, health, and technology, and has used the four media of
-        sunlight, air, water, and food to help upgrade the health and quality of
-        consumers’ domestic lives.
+        marketing. A leading technology organisation in organic energy base
+        proactive health therapy.
       </p>
     </div>
   );

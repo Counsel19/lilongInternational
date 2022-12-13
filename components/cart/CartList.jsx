@@ -1,6 +1,5 @@
 import CartListStyles from "../../styles/cart/CartList.module.css";
 import CartItem from "./CartItem";
-import Image from "next/image";
 
 const CartList = ({ cartProducts, checkout }) => {
   return (
@@ -10,15 +9,12 @@ const CartList = ({ cartProducts, checkout }) => {
       }
     >
       {cartProducts?.length === 0 ? (
-        <h3>
-          No Items in Cart{" "}
-          
-        </h3>
+        <h3>No Items in Cart</h3>
       ) : (
-        cartProducts?.map((cartProduct, index) => (
-          <div className={CartListStyles.itemWrapper} key={cartProduct?._id}>
+        cartProducts?.map((product, index) => (
+          <div className={CartListStyles.itemWrapper} key={product?._id}>
             <div className={CartListStyles.serialNum}>{index + 1}</div>
-            <CartItem cartProduct={cartProduct} />
+            <CartItem product={product} />
           </div>
         ))
       )}

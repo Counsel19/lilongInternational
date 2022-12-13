@@ -1,21 +1,16 @@
 import Head from "next/head";
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useEffect } from "react";
 import DeliveryAddress from "../../components/checkout/DeliveryAddress";
 import OrderReview from "../../components/checkout/OrderReview";
 import CartSummary from "../../components/cart/CartSummary";
 import CheckoutStyles from "../../styles/checkout/Checkout.module.css";
 import { useAppContext } from "../../context/AppContext";
+import { getSession, useSession } from "next-auth/react";
+import Image from "next/image";
+import { TailSpin } from "react-loader-spinner";
 
 const Checkout = () => {
-  const { cartItems: cartProducts, user } = useAppContext();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!user) {
-      router.push("/login");
-    }
-  });
+  const { cartItems: cartProducts, user, isLoading } = useAppContext();
 
   return (
     <div>
@@ -31,19 +26,41 @@ const Checkout = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <div className={CheckoutStyles.container}>
-        <h2>Checkout</h2>
-        <div className={CheckoutStyles.wrapper}>
-          <div className={CheckoutStyles.right}>
-            <DeliveryAddress />
-            <OrderReview products={cartProducts} />
-          </div>
-          <CartSummary products={cartProducts} checkout />
+      {!user ? (
+        <div className="w-full flex items-center justify-center">
+          <TailSpin />
         </div>
-      </div>
+      ) : (
+        <div className={CheckoutStyles.container}>
+          <h2>Checkout</h2>
+          <div className={CheckoutStyles.wrapper}>
+            <div className={CheckoutStyles.right}>
+              <DeliveryAddress />
+              <OrderReview cartProducts={cartProducts} />
+            </div>
+            <CartSummary products={cartProducts} checkout />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
 
 export default Checkout;

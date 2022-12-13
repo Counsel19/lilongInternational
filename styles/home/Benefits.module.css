@@ -2,15 +2,6 @@
   margin: 6rem 5rem 12rem;
 }
 
-.container h1 {
-  color: var(--dark-blue);
-  margin-bottom: 2rem;
-  font-weight: 500;
-  font-size: 32px;
-  text-align: center;
-  margin-bottom: 7rem;
-}
-
 .wrapper {
   display: flex;
   align-items: center;
@@ -28,7 +19,6 @@
 
 .shape article {
   border-radius: 50%;
-
   width: 160px;
   height: 160px;
   display: flex;
@@ -75,7 +65,7 @@
 }
 .article1 {
   top: -80px;
-  right: 35%;
+  right: 33%;
   background-color: rgb(253, 247, 231);
 }
 .article2 {
@@ -85,7 +75,7 @@
 }
 .article3 {
   bottom: -80px;
-  right: 35%;
+  right: 32%;
   background-color: #d9ffea;
 }
 .article4 {
@@ -96,6 +86,7 @@
 
 .details {
   width: 280px;
+  position: relative;
 }
 
 .details h3 {
@@ -107,4 +98,92 @@
 
 .details span {
   color: var(--yello);
+}
+
+.mobileBenefits {
+  display: none;
+  width: 100%;
+}
+
+@media screen and (max-width: 1096px) {
+  .container {
+    margin: 5rem 2rem;
+  }
+}
+@media screen and (max-width: 1010px) {
+  .container h1 {
+    margin-bottom: 2rem;
+  }
+  .wrapper {
+    flex-direction: column-reverse;
+  }
+  .details {
+    margin-bottom: 6rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .shape {
+    width: 320px;
+    height: 320px;
+  }
+
+  .shape article {
+    width: 120px;
+    height: 120px;
+    padding:.5rem;
+    align-items: center;
+    gap: 0;
+  }
+
+  .shape article h3 {
+    font-size: 13px;
+    margin: .5rem;
+  }
+
+  .shape article span {
+    font-size: 12px;
+  }
+
+  .shape .article0 {
+    top: 32%;
+    right: 32%;
+
+    width: 110px;
+    height: 110px;
+  }
+  .article1 {
+    top: -50px;
+    right: 32%;
+  }
+  .article2 {
+    right: -50px;
+    top: 32%;
+  }
+  .article3 {
+    bottom: -50px;
+    right: 32%;
+  }
+  .article4 {
+    left: -50px;
+    top: 32%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .container {
+    margin: 5rem 1rem;
+  }
+  .container h1 {
+    font-size: 25px;
+  }
+  .details h3 {
+    font-size: 30px;
+  }
+  .shape {
+    display: none;
+  }
+
+  .mobileBenefits {
+    display: flex;
+  }
 }

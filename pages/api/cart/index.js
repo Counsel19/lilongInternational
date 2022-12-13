@@ -4,8 +4,10 @@ import Product from "../../../models/Product";
 import { StatusCodes } from "http-status-codes";
 import { HandleError } from "../../../utils";
 import { jwtVerify } from "jose";
-import checkPermissions from "../../../utils/checkPermissoin";
+import checkPermissions from "../../../utils/checkPermission";
 import BadRequestError from "../../../errors/bad-request";
+import cookie from "cookie";
+import UnAuthenticatedError from "../../../errors/unauthenticated";
 
 export default async function handler(req, res) {
   const { method, query } = req;
@@ -15,105 +17,152 @@ export default async function handler(req, res) {
 
     if (method === "GET") {
       let cartRes;
-      if (query.id) {
-        cartRes = await Cart.findById(query.id);
+
+      const { accessToken } = cookie.parse(req.headers?.cookie || "");
+
+      if (!accessToken) {
+        throw new UnAuthenticatedError("Invalid Credentials");
+      }
+
+      const { payload } = await jwtVerify(
+        accessToken,
+        new TextEncoder().encode(process.env.JWT_SECRET)
+      );
+
+      if (!payload.isAdmin) {
+        cartRes = await Cart.find({ createdBy: payload.userId });
       } else {
         cartRes = await Cart.find();
       }
 
       let totalItemsInCart = 0;
       let subTotal = 0;
+
       const cart = await Promise.all(
         cartRes.map(async (item) => {
           const productId = JSON.stringify(item.productId);
           const productDoc = await Product.findById(productId.slice(1, -1));
-          totalItemsInCart += item.quantity;
-          subTotal += productDoc.price * item.quantity;
-          return {
-            _id: item._id,
-            name: productDoc.name,
-            image: productDoc.images[0],
-            price: productDoc.price,
-            actualPrice: productDoc.actualPrice,
-            inStock: productDoc.inStock,
-            quantity: item.quantity,
-          };
+
+          if (productDoc) {
+            totalItemsInCart += item.quantity || 0;
+            subTotal += productDoc?.price * item.quantity || 0;
+            return {
+              productId: productId.slice(1, -1),
+              _id: item._id,
+              name: productDoc.name,
+              image: productDoc.images[0],
+              price: productDoc.price,
+              actualPrice: productDoc.actualPrice,
+              inStock: productDoc.inStock,
+              link: productDoc.link,
+              quantity: item.quantity,
+            };
+          } else {
+            throw new UnAuthenticatedError("Invalid Product");
+          }
         })
       );
 
-      res.status(StatusCodes.OK).json({ cart, totalItemsInCart, subTotal });
+      res
+        .status(StatusCodes.OK)
+        .json({ cart: cart || [], totalItemsInCart, subTotal });
     }
 
     if (method === "POST") {
       let responseCartItem;
-      const cartItem = await Cart.findOne({ productId: req.body.productId });
-      if (cartItem) {
-        responseCartItem = await Cart.findOneAndUpdate(
-          { _id: cartItem._id },
-          req.body,
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
 
-        res.status(StatusCodes.OK).json(responseCartItem);
-      } else {
-        const secret = process.env.JWT_SECRET;
-        const jwt = req.cookies.token;
+      const secret = process.env.JWT_SECRET;
+      const { accessToken } = cookie.parse(req.headers?.cookie || "");
 
-        const { payload } = await jwtVerify(
-          jwt,
-          new TextEncoder().encode(secret)
-        );
-
-        req.body.createdBy = payload.userId;
-        responseCartItem = await Cart.create(req.body);
-        res.status(StatusCodes.CREATED).json(responseCartItem);
+      if (!accessToken) {
+        throw new UnAuthenticatedError("Invalid Credentials");
       }
+
+      const { payload } = await jwtVerify(
+        accessToken,
+        new TextEncoder().encode(secret)
+      );
+
+      const newCart = {
+        createdBy: payload.userId,
+        productId: req.body.productId,
+        quantity: req.body.quantity,
+      };
+
+      responseCartItem = await Cart.create(newCart);
+      res.status(StatusCodes.CREATED).json(responseCartItem);
     }
 
     if (method === "PATCH") {
-      const cartId = query.id;
-      let cartItems = await Cart.findOne({ _id: cartId });
+      let responseCartItem;
+      let cartItem;
 
-      if (!cartItems) {
-        throw new Error(`No job with Id: ${cartId}`);
-      }
+      const { accessToken } = cookie.parse(req.headers?.cookie || "");
 
-      //check permissions
-      // checkPermissions(req.user, job.createdBy);
-
-      cartItems = await Cart.findOneAndUpdate({ _id: cartId }, req.body, {
-        new: true,
-        runValidators: true,
-      });
-      res.status(StatusCodes.OK).json(cartItems);
-    }
-
-    if (method === "DELETE") {
-      const { id: cartId } = query;
-
-      const cartItem = await Cart.findOne({ _id: cartId });
-
-      if (!cartItem) {
-        throw new BadRequestError(`No cart with Id: ${cartId}`);
+      if (!accessToken) {
+        throw new UnAuthenticatedError("Invalid Credentials");
       }
 
       const secret = process.env.JWT_SECRET;
-      const jwt = req.cookies.token;
+      const { payload } = await jwtVerify(
+        accessToken,
+        new TextEncoder().encode(secret)
+      );
+
+      cartItem = await Cart.findById(req.body.productId);
+
+      if (!cartItem) {
+        throw new UnAuthenticatedError("Invalid Credentials");
+      }
+      checkPermissions(payload.userId, cartItem.createdBy);
+      responseCartItem = await Cart.findOneAndUpdate(
+        { _id: cartItem._id },
+        { quantity: req.body.quantity },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      res.status(StatusCodes.OK).json(responseCartItem);
+    }
+
+    if (method === "DELETE") {
+      const { cartId } = query;
+
+      const secret = process.env.JWT_SECRET;
+      const { accessToken } = cookie.parse(req.headers?.cookie || "");
+
+      if (!accessToken) {
+        throw new UnAuthenticatedError("Invalid Credentials");
+      }
 
       const { payload } = await jwtVerify(
-        jwt,
+        accessToken,
         new TextEncoder().encode(secret)
       );
 
       req.user = payload.userId;
 
-      checkPermissions(req.user, cartItem.createdBy);
+      if (cartId) {
+        const cartItem = await Cart.findOne({ _id: cartId });
 
-      await cartItem.remove();
-      res.status(StatusCodes.OK).json({ msg: "Success: Cart Deleted" });
+        checkPermissions(req.user, cartItem.createdBy);
+
+        await cartItem.remove();
+        res.status(StatusCodes.OK).json({ msg: "Success: Cart Item Deleted" });
+      } else {
+        console.log(req.user, "req.user");
+        const cartItems = await Cart.find({ createdBy: req.user });
+
+        if (!cartItems) {
+          throw new BadRequestError(`No Item in Cart`);
+        }
+
+        await Promise.all(
+          cartItems.map(async (item) => await Cart.deleteOne({ _id: item._id }))
+        );
+        res.status(StatusCodes.OK).json({ msg: "Success: Cart Deleted" });
+      }
     }
   } catch (error) {
     HandleError(error, req, res);

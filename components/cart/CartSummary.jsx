@@ -21,11 +21,11 @@ const CartSummary = ({ cartProducts, checkout }) => {
       </div>
       <div className={CartSummaryStyles.item}>
         <h5>Subtotal: </h5>
-        <span className={CartSummaryStyles.subPrice}>${subTotal}</span>
+        <span className={CartSummaryStyles.subPrice}>&#8358;{subTotal}</span>
       </div>
       <div className={CartSummaryStyles.item}>
         <h5 className={CartSummaryStyles.price}>Total: </h5>
-        <span className={CartSummaryStyles.price}>${subTotal}</span>
+        <span className={CartSummaryStyles.price}>&#8358;{subTotal}</span>
       </div>
 
       {!checkout && (
@@ -77,7 +77,9 @@ const CartSummary = ({ cartProducts, checkout }) => {
               <button
                 className={CartSummaryStyles.btn}
                 disabled={
-                  cartProducts?.length === 0 || !user?.address || !user?.phone
+                  cartProducts?.length === 0 ||
+                  !user?.deliveryAddress ||
+                  !user?.phone
                 }
               >
                 Proceed to Payment

@@ -1,14 +1,10 @@
-.container > div {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+.container {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  height: fit-content;
+  overflow: visible;
   transition: 0.5s;
   cursor: pointer;
 }
-
 
 .container .wrapper {
   margin: 1rem;
@@ -21,8 +17,7 @@
 .imgContainer {
   display: flex;
   position: relative;
-  height: 270px;
-  width: 100%;
+  height: 200px;
   transition: 0.3s;
 }
 .details {
@@ -86,6 +81,24 @@
   cursor: pointer;
   color: #fff;
   width: fit-content;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 
+/* @media screen and (max-width: 854px) {
+  .details h3 {
+    font-size: 15px;
+  }
+  .container .wrapper {
+    margin: 0.5rem;
+  }
+  .details .price {
+    font-size: 14px;
+  }
+  .details .price span:last-of-type {
+    font-size: 12px;
+  }
+  .imgContainer {
+    height: 100px;
+    width: 100%;
+  }
+} */

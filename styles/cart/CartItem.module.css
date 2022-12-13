@@ -1,99 +1,168 @@
-.container{
-    border: 1px solid #ddd;
-    border-radius: .25rem;
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    width: 100%;
-    height: 100%;
+.container {
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
 }
 
-.productInfo{
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+.productInfo {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
 
-.imageWrapper{
-    position: relative;
-    width: 150px;
-    height: 150px;
+.imageWrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
 }
 
 .details {
-    display: flex;
-    gap: .3rem;
-    width: 100%;
+  display: flex;
+  gap: 0.3rem;
+  width: 100%;
+  flex-direction: column;
+}
+
+.details h3 {
+  font-size: 19px;
+}
+
+.details .prices {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.details .prices span {
+  font-size: 13px;
+  text-decoration: line-through;
+  color: var(--dark-gray);
+}
+
+.details h4 {
+  font-size: 17px;
+  font-weight: 500;
+}
+.details > span {
+  color: var(--dark-blue);
+}
+
+.quantity {
+  margin: 1rem 0;
+}
+
+.selectQuantity {
+  border: 1px solid var(--dark-blue);
+  border-radius: 0.25rem;
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  margin-top: 0.3rem;
+}
+
+.selectQuantity span {
+  padding: 0.2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--dark-blue);
+  cursor: pointer;
+}
+
+.selectQuantity span:nth-of-type(2) {
+  border-left: 1px solid var(--dark-blue);
+  border-right: 1px solid var(--dark-blue);
+  color: var(--dark-blue);
+  font-size: 20px;
+  font-weight: 500;
+  cursor: unset;
+}
+
+.action {
+  color: var(--yello);
+  display: flex;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.action div {
+  display: flex;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.action span{
+  cursor: pointer;
+}
+.action a {
+  color: var(--dark-blue);
+  background-color: #fff;
+  padding: 0.8rem;
+  font-weight: bold;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  margin-top: 1.5rem;
+  border: 1px solid var(--dark-blue);
+  outline: 0;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: 0.9s;
+}
+.removeIcon {
+  display: none;
+}
+
+@media screen and (max-width: 852px) {
+  .container {
+    padding: .8rem;
+  }
+
+  .imageWrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .productInfo {
     flex-direction: column;
+    gap: 0.7rem;
   }
-  
   .details h3 {
-    font-size: 19px;
+    font-size: 14px;
   }
-
-  .details .prices{
-    display: flex;
-    gap: 1rem;
-    align-items: flex-end;
+  .details span {
+    font-size: 12px;
   }
-  
-  .details .prices span{
-   font-size: 13px;
-   text-decoration: line-through;
-   color: var(--dark-gray);
+  .action div span {
+    display: none;
   }
-  
-  .details h4 {
-    font-size: 17px;
-    font-weight: 500;
+  .action > span {
+   font-size: 12px;
   }
-  .details > span {
-    
-    color: var(--dark-blue);
-  }
-  
-  .quantity {
-    margin: 1rem 0;
-  }
-  
-  .selectQuantity {
-    border: 1px solid var(--dark-blue);
-    border-radius: 0.25rem;
-    height: fit-content;
-    width: fit-content;
-    display: flex;
-    margin-top: 0.3rem;
-  }
-  
-  .selectQuantity span {
-    padding: 0.2rem;
-    width: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: var(--dark-blue);
-    cursor: pointer;
-  }
-  
+  .selectQuantity,
   .selectQuantity span:nth-of-type(2) {
-    border-left: 1px solid var(--dark-blue);
-    border-right: 1px solid var(--dark-blue);
-    color: var(--dark-blue);
-    font-size: 20px;
-    font-weight: 500;
-    cursor: unset;
+    font-size: 12px;
   }
-
-  .action{
-    color: var(--yello);
-    display: flex;
-    align-items: center;
+  .removeIcon {
+    display: block;
+    font-size: 22px;
   }
-
-  .action span{
-    display: flex;
-    width: fit-content;
-    cursor: pointer;
+  .action a {
+    padding: .3rem;
+    width: 80px;
+    font-size: 12px;
   }
+}

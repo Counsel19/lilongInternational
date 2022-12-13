@@ -6,14 +6,12 @@ import { useAppContext } from "../../context/AppContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-
 const PurchaseInfo = ({ product }) => {
   const { isItemInCart, handleAddToCart, handleAddToSaved } = useAppContext();
 
   const initialQuantity = 1;
   //isItemInCart will return the quantity of the item if in cart else 0
   const [quantity, setQuantity] = useState(isItemInCart(product));
-  const [deliveryPrice, setDeliveryPrice] = useState(null);
   const router = useRouter();
 
   const changeQuantity = (action) => {
@@ -25,14 +23,7 @@ const PurchaseInfo = ({ product }) => {
     }
   };
 
-  const selectDeliveryPrice = (e) => {
-    const value = e.target.value;
-    setDeliveryPrice(
-      product.deliveryPrices.map(
-        (item) => item.location === value && item.price
-      )
-    );
-  };
+
 
   const handleCartActions = () => {
     const increasedQuantity = quantity === 0 ? quantity + 1 : quantity;
@@ -41,9 +32,9 @@ const PurchaseInfo = ({ product }) => {
   };
 
   const handleSavedActions = () => {
-    handleAddToSaved(product, quantity)
+    handleAddToSaved(product, quantity);
     router.push("/saved");
-  }
+  };
 
   return (
     <div className={PInfoStyles.container}>
@@ -95,48 +86,11 @@ const PurchaseInfo = ({ product }) => {
         </div>
       </div>
 
-      <div className={PInfoStyles.delivery}>
-        <h3>Delivery</h3>
-
-        <div className={PInfoStyles.destination}>
-          <h4>Destination: </h4>
-          <span>Choose your location</span>
-
-          <div className={PInfoStyles.selects}>
-            <select name="destination">
-              {product.deliveryPrices.map((item) => (
-                <option
-                  value={item.location.toLowerCase()}
-                  key={item.location}
-                  onClick={selectDeliveryPrice}
-                >
-                  {item.location}
-                </option>
-              ))}
-            </select>
-            <select name="destination">
-              {product.deliveryPrices.map((item) => (
-                <option
-                  value={item.location.toLowerCase()}
-                  key={item.location}
-                  onClick={selectDeliveryPrice}
-                >
-                  {item.location}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <h4>
-            Amount for Delivery: ${product.price} plus
-            <span>${deliveryPrice}</span>
-          </h4>
-        </div>
-      </div>
+     
 
       <div className={PInfoStyles.seller}>
         <h4>Sold by</h4>
-        <span>Buelah Health Solution</span>
+        <span>Beulah Health Solution</span>
         <span>100% Assurance</span>
       </div>
     </div>

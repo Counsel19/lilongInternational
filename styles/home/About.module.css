@@ -27,3 +27,27 @@
 .tagline span {
   color: var(--yello);
 }
+
+@media screen and (max-width: 1096px) {
+  .container {
+    margin: 10rem 2rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container,
+  .tagline h1 {
+    margin: 5rem 1rem;
+  }
+
+  .tagline h1 {
+    font-size: 30px;
+  }
+  .container h2 {
+    text-align: left;
+    font-size: 28px;
+  }
+  .container p {
+    font-size: 18px;
+  }
+}

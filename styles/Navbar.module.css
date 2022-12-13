@@ -17,10 +17,12 @@
   gap: 2.5rem;
   list-style: none;
   align-items: center;
+  flex: .8;
 }
 
 .right ul {
   gap: 1.5rem;
+  flex : 1;
 }
 
 .center {
@@ -31,6 +33,11 @@
   font-size: 22px;
   font-family: "League Spartan", sans-serif;
   font-weight: 500;
+}
+.imgWrapper {
+  position: relative;
+  width: 60px;
+  height: 60px;
 }
 
 .img {
@@ -62,10 +69,13 @@
   color: var(--dark-blue);
   font-size: 15px;
 }
+.userIcon {
+  display: none;
+}
 
 .account {
   position: relative;
-  width: 155px;
+  width: 160px;
   padding: 0.4rem;
   border-radius: 0.25rem;
   font-weight: 600;
@@ -81,13 +91,13 @@
   position: absolute;
   top: 100%;
   left: 0;
-  width: 155px;
+  width: 160px;
   height: fit-content;
   background-color: #fff;
   color: var(--dark-blue) !important;
   display: flex;
   flex-direction: column;
-  z-index: 100;
+  z-index: 999;
   color: var(--dark-gray);
   padding-top: 0.5rem;
   font-weight: normal;
@@ -102,4 +112,102 @@
 }
 .dropdown span:hover {
   background-color: #eee;
+}
+.menu {
+  display: none;
+}
+
+.mobileContainer {
+  background-color: #fff;
+  padding: 3rem 2rem; 
+  border-radius: 0.45rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  position: relative;
+  margin: 0 1rem;
+}
+
+.mobileContainer a {
+  font-weight: 600;
+}
+.mobileContainer header {
+  background-color: var(--banner-blue);
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 19px;
+  justify-content: center;
+  padding: 1rem 1rem;
+  margin: 1rem 0
+}
+
+.mobileLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.mobileLinks span {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: gray;
+  font-weight: 600;
+}
+
+.closeIcon {
+  color: red;
+  font-size: 29px;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+@media screen and (max-width: 1096px) {
+  .container {
+    padding: 0.4rem 2rem;
+  }
+  .userIcon {
+    display: block;
+  }
+  .userName {
+    display: none;
+  }
+  .account {
+    width: fit-content;
+  }
+}
+@media screen and (max-width: 908px) {
+  .left {
+    display: none;
+  }
+  .right {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 0.4rem 1rem;
+  }
+  .left {
+    display: none;
+  }
+  .right {
+    display: none;
+  }
+
+
+  .imgWrapper {
+    width: 40px;
+    height: 40px;
+  }
+  .center {
+    font-size: 16px;
+  }
 }

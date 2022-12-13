@@ -1,7 +1,7 @@
 import BDetailsStyles from "../../styles/home/BenefitDetails.module.css";
-import { GrClose } from "react-icons/gr";
 import { useAppContext } from "../../context/AppContext";
 import * as ACTIONS from "../../context/actions";
+import { MdOutlineClose } from "react-icons/md";
 
 const BenefitDetails = () => {
   const { overlayIndex, dispatch } = useAppContext();
@@ -24,7 +24,8 @@ const BenefitDetails = () => {
               reach a balance, and the blood sugar naturally returns to normal.
             </p>
 
-            <GrClose
+            <MdOutlineClose
+            size={24}
               className={BDetailsStyles.icon}
               onClick={() =>
                 dispatch({
@@ -51,7 +52,8 @@ const BenefitDetails = () => {
               reach a balance, and the blood sugar naturally returns to normal.
             </p>
 
-            <GrClose
+            <MdOutlineClose
+              size={30}
               className={BDetailsStyles.icon}
               onClick={() =>
                 dispatch({
@@ -81,7 +83,8 @@ const BenefitDetails = () => {
               reach a balance, and the blood sugar naturally returns to normal.
             </p>
 
-            <GrClose
+            <MdOutlineClose
+              size={24}
               className={BDetailsStyles.icon}
               onClick={() =>
                 dispatch({
@@ -108,7 +111,8 @@ const BenefitDetails = () => {
               reach a balance, and the blood sugar naturally returns to normal.
             </p>
 
-            <GrClose
+            <MdOutlineClose
+              size={24}
               className={BDetailsStyles.icon}
               onClick={() =>
                 dispatch({

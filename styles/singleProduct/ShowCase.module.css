@@ -1,43 +1,101 @@
-.container{
-    width: 100%;
+.container {
+  width: 100%;
 }
 
-.galary{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    margin-bottom: 1rem;
+.galary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-right: 0.5rem;
 }
 
-.imageWrapper{
-    width: 100px;
-    height: 80px;
-    position: relative;
-    border: 1px solid var(--dark-blue);
-    border-radius: .25rem;
-    cursor: pointer;
+.imageWrapper {
+  width: 100px;
+  height: 80px;
+  position: relative;
+  border: 1px solid var(--dark-blue);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e1ecf0;
 }
 
-.overlay{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: rgba(238, 242, 230, .5)
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(238, 242, 230, 0.5);
 }
 
-.imageDisplay{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.imageDisplay {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 }
 
-.imageCase{
-    width: 700px;
-    height: 450px;
-    position: relative;
-    
+.imageCase {
+  width: 700px;
+  height: 450px;
+  position: relative;
+}
+.imageCase2 {
+  width: 450px;
+  height: 600px;
+  position: relative;
+}
+.imageOptsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteIcon {
+  opacity: 0;
+  z-index: -9999;
+  cursor: pointer;
+  color: rgb(233, 5, 5);
+}
+.imageOptsContainer:hover .deleteIcon {
+  opacity: 1;
+  z-index: 100;
+}
+
+@media screen and (max-width: 1234px) {
+  .imageCase {
+    width: 580px;
+    height: 300px;
+  }
+}
+@media screen and (max-width: 1076px) {
+  .imageDisplay {
+    margin-top: 2rem;
+  }
+  .imageWrapper {
+    width: 70px;
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 854px) {
+  .imageCase {
+    width: 300px;
+    height: 200px;
+  }
+  .container {
+    padding: 3rem 2rem;
+  }
+  .imageCase {
+    width: 500px;
+    height: 300px;
+  }
 }

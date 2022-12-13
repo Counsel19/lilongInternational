@@ -19,11 +19,10 @@
   margin-bottom: 0.5rem;
   padding: 0;
   text-transform: uppercase;
-  font-family: 'League Spartan', sans-serif;
+  font-family: "League Spartan", sans-serif;
 }
 
 .right {
-  
   width: 550px;
 }
 
@@ -34,26 +33,16 @@
   z-index: 10;
 }
 
-.backdrop {
-  width: 600px;
-  height: 590px;
-  border-radius: 50%;
-  background-color: var(--banner-blue);
-  position: absolute;
-  top: 0;
-  right: 5rem;
-}
-
 .btns {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   margin-top: 2rem;
 }
 
 .btn1,
 .btn2 {
-  width: 180px;
+  max-width: 190px;
   height: 47px;
   border: 0;
   background-color: #fff;
@@ -64,6 +53,7 @@
   border: 1px solid #fff;
   cursor: pointer;
   transition: 0.4s;
+  padding: 0.5rem 1rem;
 }
 
 .btns .btn1:hover {
@@ -76,4 +66,50 @@
 }
 .btns .btn2:hover {
   outline: 2px solid #fff;
+}
+
+@media screen and (max-width: 1096px) {
+  .container {
+    padding: 4rem 2rem;
+  }
+}
+@media screen and (max-width: 994px) {
+  .container {
+    flex-direction: column;
+    height: fit-content;
+    gap: 2rem;
+  }
+  .left {
+    width: fit-content;
+    margin-bottom: 2rem;
+  }
+  .left h1 {
+    font-size: 30px;
+  }
+
+  .right {
+    width: fit-content;
+  }
+  .imgContainer {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 4rem 1rem;
+  }
+
+  .imgContainer {
+    width: 300px;
+    height: 300px;
+  }
+  .right {
+    width: 300px;
+  }
+  .btn1,
+  .btn2 {
+    font-size: 13px;
+  }
 }

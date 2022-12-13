@@ -23,4 +23,33 @@
 
 .container a {
   color: var(--yello);
+  align-items: center;
+  display: flex;
+  gap: .5rem;
+}
+
+
+@media screen and (max-width: 1096px) {
+  .container {
+    padding: 3rem 2rem;
+  }
+}
+@media screen and (max-width: 852px) {
+  .details {
+    flex-direction: column;
+  }
+  .container h1 {
+    line-height: 20px;
+    font-size: 26px;
+    margin: 1rem 0 1.5rem;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .container{
+    padding: 3rem 1rem;
+  }
+
+  
 }

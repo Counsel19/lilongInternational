@@ -1,0 +1,21 @@
+.container {
+  padding: 3rem 5rem;
+  display: flex;
+  gap: 4rem;
+  background-color: #fcfcfc;
+}
+
+@media screen and (max-width: 1096px) {
+    .container {
+      padding: 3rem 2rem;
+      gap: 2rem;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .container {
+      padding: 3rem 1rem;
+    }
+   
+  }
+  

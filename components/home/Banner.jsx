@@ -18,10 +18,10 @@ const Banner = () => {
         </div>
       </div>
       <div className={BannerStyles.right}>
-        <div className={BannerStyles.backdrop}></div>
+        {/* <div className={BannerStyles.backdrop}></div> */}
         <div className={BannerStyles.imgContainer}>
           <Image
-            src="/images/lilong_products.png"
+            src="/images/banner_img.png"
             alt="Lilong Products"
             layout="fill"
             objectFit="contain"

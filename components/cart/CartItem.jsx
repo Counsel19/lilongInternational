@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { MdDeleteOutline } from "react-icons/md";
 import { useAppContext } from "../../context/AppContext";
 import CartItemStyles from "../../styles/cart/CartItem.module.css";
 
@@ -15,13 +16,20 @@ const useDidMountEffect = (func, deps) => {
   }, deps);
 };
 
-const CartItem = ({ cartProduct }) => {
-  const [quantity, setQuantity] = useState(cartProduct.quantity);
-
+const CartItem = ({ product }) => {
+  const [quantity, setQuantity] = useState(product.quantity);
   const { isLoading, handleAddToCart, handleRemoveFromCart } = useAppContext();
+  const router = useRouter();
+
+  const handleNavigate = () => {
+    router.push({
+      pathname: product.link,
+      query: { id: product.productId },
+    });
+  };
 
   useDidMountEffect(() => {
-    handleAddToCart(cartProduct, quantity);
+    handleAddToCart(product, quantity, "fromCart");
   }, [quantity]);
 
   const changeQuantity = (action) => {
@@ -36,24 +44,22 @@ const CartItem = ({ cartProduct }) => {
   return (
     <div className={CartItemStyles.container}>
       <div className={CartItemStyles.productInfo}>
-        <Link href="/shop/url/">
-          <a className={CartItemStyles.imageWrapper}>
-            <Image
-              src={cartProduct.image}
-              alt={cartProduct.name}
-              layout="fill"
-              objectFit="contain"
-            />
-          </a>
-        </Link>
+        <div className={CartItemStyles.imageWrapper} onClick={handleNavigate}>
+          <Image
+            src={product.image}
+            alt={product.name}
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
 
         <div className={CartItemStyles.details}>
-          <h3>{cartProduct.name}</h3>
+          <h3>{product.name}</h3>
           <div className={CartItemStyles.prices}>
-            <h4>${cartProduct.price}</h4>
-            <span>${cartProduct.actualPrice}</span>
+            <h4>&#8358;{product.price}</h4>
+            <span>&#8358;{product.actualPrice}</span>
           </div>
-          <span>{cartProduct.inStock ? "In Stock" : "Not in Stock"}</span>
+          <span>{product.inStock ? "In Stock" : "Not in Stock"}</span>
 
           <div className={CartItemStyles.selectQuantity}>
             <span onClick={() => changeQuantity("-")}>-</span>
@@ -63,20 +69,11 @@ const CartItem = ({ cartProduct }) => {
         </div>
       </div>
 
-      {isLoading && (
-        <Image
-          src="/images/spin.gif"
-          alt="Loading"
-          height={50}
-          width={50}
-          objectFit="contain"
-        />
-      )}
-
       <div className={CartItemStyles.action}>
-        <span onClick={() => handleRemoveFromCart(cartProduct._id)}>
-          Remove Item
-        </span>
+        <div onClick={() => handleRemoveFromCart(product._id)}>
+          <span>Remove Item</span>
+          <MdDeleteOutline className={CartItemStyles.removeIcon} />
+        </div>
       </div>
     </div>
   );

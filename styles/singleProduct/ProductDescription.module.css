@@ -3,6 +3,8 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   padding: 1rem;
+  width: 100%;
+  flex: 1;
 }
 
 .container h3 {
@@ -32,8 +34,8 @@
   background-color: #fff;
 }
 
-.productDetails h3{
-  margin-bottom: .6rem;
+.productDetails h3 {
+  margin-bottom: 0.6rem;
 }
 
 .features {
@@ -55,4 +57,9 @@
 
 .listItems {
   padding: 0 1rem;
+}
+@media screen and (max-width: 500px) {
+  .container h3 {
+    text-align: center;
+  }
 }

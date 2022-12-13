@@ -1,0 +1,38 @@
+.container {
+  padding: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  height: fit-content;
+
+}
+
+.container h2 {
+  font-size: 23px;
+  color: var(--dark-gray);
+  margin-bottom: 1rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wrapper a {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wrapper a:hover {
+  background-color: rgba(230, 241, 255, 0.897);
+}
+
+@media screen and (max-width: 894px) {
+  .container {
+    padding: 1rem;
+  }
+}

@@ -51,20 +51,6 @@ const ProductSchema = new mongoose.Schema(
         },
       ],
     },
-    deliveryPrices: {
-      type: [
-        {
-          location: {
-            type: String,
-            required: [true, "Please provide a specification title"],
-          },
-          price: {
-            type: String,
-            required: [true, "Please provide a specification description"],
-          },
-        },
-      ],
-    },
     features: {
       type: String,
       required: [true, "Please provide features"],
@@ -77,4 +63,5 @@ const ProductSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.Product || mongoose.model("Product", ProductSchema);
+export default mongoose.models.Product ||
+  mongoose.model("Product", ProductSchema);

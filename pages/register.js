@@ -5,83 +5,48 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAppContext } from "../context/AppContext";
 import countries from "../lib/countries.min.json";
-
-const inputInit = {
-  firstname: "",
-  lastname: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-  country: "",
-  state: "",
-  phone: "",
-  deliveryAddress: "",
-};
+import { HiAtSymbol, HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import { useFormik } from "formik";
+import { registerValidator } from "../lib/formValidation";
+import { useSession } from "next-auth/react";
+import { BiArrowBack } from "react-icons/bi";
 
 const Register = () => {
   const { user, isLoading, handleRegister, handleError } = useAppContext();
   const router = useRouter();
-  const [input, setInput] = useState(inputInit);
+  const { data: session } = useSession();
+
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirmPassword: false,
+  });
 
   useEffect(() => {
-    if (user) router.push("/products");
+    if (user || session) router.push("/products");
+  }, []);
+
+  const onSubmit = async (values) => {
+    const res = await handleRegister(values);
+    if (res) {
+      router.push("/products");
+    }
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      country: "",
+      state: "",
+      phone: "",
+      deliveryAddress: "",
+    },
+    validate: registerValidator,
+    onSubmit,
   });
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    const name = e.target.name;
-    setInput({ ...input, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      firstname,
-      lastname,
-      email,
-      password,
-      confirmPassword,
-      country,
-      state,
-      phone,
-      deliveryAddress,
-    } = input;
-
-    if (
-      !firstname ||
-      !lastname ||
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !country ||
-      !state ||
-      !phone ||
-      !deliveryAddress
-    ) {
-      handleError("Please input all fields");
-
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      handleError("Your Passwords do not match");
-      return;
-    }
-    const submitInput = {
-      firstname,
-      lastname,
-      email,
-      password,
-      country,
-      state,
-      phone,
-      deliveryAddress,
-    };
-
-    handleRegister(submitInput);
-    setInput(inputInit);
-    router.push("/products");
-  };
 
   return (
     <div>
@@ -99,7 +64,13 @@ const Register = () => {
       </Head>
 
       <div className={RegisterStyles.container}>
-        <div className={RegisterStyles.formWrap} style={{ width: "42vw" }}>
+        <div className={RegisterStyles.formWrap}>
+          <Link href="/">
+            <a className="flex gap-2 items-center text-blue-500">
+              <BiArrowBack />
+              Back Home
+            </a>
+          </Link>
           <h2>Register Here!</h2>
           <p>
             Have an account already?{" "}
@@ -108,9 +79,12 @@ const Register = () => {
             </Link>
           </p>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             {isLoading ? (
-              <div className={RegisterStyles.loading}> Processing Request! Please wait...</div>
+              <div className={RegisterStyles.loading}>
+                {" "}
+                Processing Request! Please wait...
+              </div>
             ) : null}
             <div className={RegisterStyles.formLine}>
               <div className={RegisterStyles.formGroup}>
@@ -120,9 +94,14 @@ const Register = () => {
                   name="firstname"
                   type="text"
                   placeholder="Eg. Micheal"
-                  onChange={handleInputChange}
-                  value={input.firstname}
+                  {...formik.getFieldProps("firstname")}
+                  className="border rounded"
                 />
+                {formik.errors.firstname && formik.touched.firstname ? (
+                  <span className="text-rose-500">
+                    {formik.errors.firstname}
+                  </span>
+                ) : null}
               </div>
 
               <div className={RegisterStyles.formGroup}>
@@ -131,9 +110,14 @@ const Register = () => {
                   name="lastname"
                   type="text"
                   placeholder="Eg. Robinson"
-                  onChange={handleInputChange}
-                  value={input.lastname}
+                  className="border rounded"
+                  {...formik.getFieldProps("lastname")}
                 />
+                {formik.errors.lastname && formik.touched.lastname ? (
+                  <span className="text-rose-500">
+                    {formik.errors.lastname}
+                  </span>
+                ) : null}
               </div>
             </div>
             <div className={RegisterStyles.formLine}>
@@ -144,20 +128,26 @@ const Register = () => {
                   name="email"
                   type="email"
                   placeholder="Please enter a valid email"
-                  onChange={handleInputChange}
-                  value={input.email}
+                  {...formik.getFieldProps("email")}
+                  className="border rounded"
                 />
+                {formik.errors.email && formik.touched.email ? (
+                  <span className="text-rose-500">{formik.errors.email}</span>
+                ) : null}
               </div>
               <div className={RegisterStyles.formGroup}>
-                <label htmlFor="phone">Email</label>
+                <label htmlFor="phone">Phone</label>
                 <input
                   id="phone"
                   name="phone"
                   type="text"
                   placeholder="+23490765757"
-                  onChange={handleInputChange}
-                  value={input.phone}
+                  className="border rounded"
+                  {...formik.getFieldProps("phone")}
                 />
+                {formik.errors.phone && formik.touched.phone ? (
+                  <span className="text-rose-500">{formik.errors.phone}</span>
+                ) : null}
               </div>
             </div>
 
@@ -167,9 +157,9 @@ const Register = () => {
                 <select
                   id="country"
                   name="country"
-                  value={input.country}
-                  onChange={handleInputChange}
+                  {...formik.getFieldProps("country")}
                   autoComplete="country-name"
+                  className="border rounded"
                 >
                   <option value="">Select Country</option>
                   {Object.keys(countries).map((country, index) => (
@@ -178,6 +168,9 @@ const Register = () => {
                     </option>
                   ))}
                 </select>
+                {formik.errors.country && formik.touched.country ? (
+                  <span className="text-rose-500">{formik.errors.country}</span>
+                ) : null}
               </div>
 
               <div className={RegisterStyles.formGroup}>
@@ -186,18 +179,23 @@ const Register = () => {
                   id="state"
                   name="state"
                   autoComplete="state-name"
-                  value={input.state}
-                  onChange={handleInputChange}
-                  disabled={!input.country}
+                  {...formik.getFieldProps("state")}
+                  disabled={!formik.values.country}
+                  className="border rounded"
                 >
                   <option value="">Select state</option>
-                  {input.country &&
-                    countries[`${input.country}`].map((state, index) => (
-                      <option value={state} key={`${state}-${index}`}>
-                        {state}
-                      </option>
-                    ))}
+                  {formik.values.country &&
+                    countries[`${formik.values.country}`].map(
+                      (state, index) => (
+                        <option value={state} key={`${state}-${index}`}>
+                          {state}
+                        </option>
+                      )
+                    )}
                 </select>
+                {formik.errors.state && formik.touched.state ? (
+                  <span className="text-rose-500">{formik.errors.state}</span>
+                ) : null}
               </div>
             </div>
 
@@ -207,42 +205,99 @@ const Register = () => {
                 name="deliveryAddress"
                 type="text"
                 placeholder="your delivery address"
-                onChange={handleInputChange}
-                value={input.deliveryAddress}
+                className="border rounded"
+                {...formik.getFieldProps("deliveryAddress")}
               />
+              {formik.errors.deliveryAddress &&
+              formik.touched.deliveryAddress ? (
+                <span className="text-rose-500">
+                  {formik.errors.deliveryAddress}
+                </span>
+              ) : null}
             </div>
             <div className={RegisterStyles.formLine}>
               <div className={RegisterStyles.formGroup}>
                 <label htmlFor="password">Password </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  onChange={handleInputChange}
-                  value={input.password}
-                />
-                <span>Pasword should have at least 6 characters</span>
+                <div className="flex border rounded bg-white">
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword.password ? "text" : "password"}
+                    placeholder="Password"
+                    {...formik.getFieldProps("password")}
+                    className={RegisterStyles.inputField}
+                  />
+                  <span
+                    onClick={() =>
+                      setShowPassword({
+                        ...showPassword,
+                        password: !showPassword.password,
+                      })
+                    }
+                    className="icon cursor-pointer flex items-center px-4"
+                  >
+                    {showPassword.password ? (
+                      <HiOutlineEye size={20} />
+                    ) : (
+                      <HiOutlineEyeOff size={20} />
+                    )}
+                  </span>
+                </div>
+                {formik.errors.password && formik.touched.password ? (
+                  <span className="text-rose-500">
+                    {formik.errors.password}
+                  </span>
+                ) : null}
               </div>
               <div className={RegisterStyles.formGroup}>
                 <label htmlFor="confirmPassword">Confirm Password </label>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="Re-type your passoword"
-                  onChange={handleInputChange}
-                  value={input.confirmPassword}
-                />
+                <div className="flex border rounded bg-white">
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type={showPassword.comfirmpassword ? "text" : "password"}
+                    placeholder="Re-type your passoword"
+                    {...formik.getFieldProps("confirmPassword")}
+                    className={RegisterStyles.inputField}
+                  />
+                  <span
+                    onClick={() =>
+                      setShowPassword({
+                        ...showPassword,
+                        confirmPassword: !showPassword.confirmPassword,
+                      })
+                    }
+                    className="icon cursor-pointer flex items-center px-4"
+                  >
+                    {showPassword.confirmPassword ? (
+                      <HiOutlineEye size={20} />
+                    ) : (
+                      <HiOutlineEyeOff size={20} />
+                    )}
+                  </span>
+                </div>
+                {formik.errors.confirmPassword &&
+                formik.touched.confirmPassword ? (
+                  <span className="text-rose-500">
+                    {formik.errors.confirmPassword}
+                  </span>
+                ) : null}
               </div>
             </div>
 
-            <input type="submit" value="Submit" disabled={isLoading} />
+            <input
+              className={RegisterStyles.button}
+              type="submit"
+              value="Submit"
+              disabled={isLoading}
+            />
           </form>
         </div>
       </div>
     </div>
   );
 };
+
+Register.layout = "L4";
 
 export default Register;
