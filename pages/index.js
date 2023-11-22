@@ -50,7 +50,7 @@ export default function Home({ products }) {
       <Offers />
       <FeaturedProducts products={products} />
       <Benefits />
-  
+
       {showOverlay && <BenefitDetails />}
       <VideoSlider />
       <Articles />
@@ -78,6 +78,7 @@ export const getServerSideProps = async () => {
         };
       })
       .filter((item) => item.featured === true);
+
     return {
       props: {
         products: JSON.parse(JSON.stringify(products)),

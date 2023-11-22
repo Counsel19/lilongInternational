@@ -1,7 +1,7 @@
 import SavedStyles from "../styles/Saved.module.css";
 import Head from "next/head";
 import { useAppContext } from "../context/AppContext";
-import SavedList from "../components/saved/savedList";
+import SavedList from "../components/saved/SavedList";
 import { TailSpin } from "react-loader-spinner";
 
 const SavedItems = () => {

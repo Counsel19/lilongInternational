@@ -1,4 +1,4 @@
-import User from "../model/User.js";
+import User from "../../../models/User.js";
 import { StatusCodes } from "http-status-codes";
 
 export default async function handler(req, res) {
